@@ -1,0 +1,34 @@
+<div class="formum">
+    <mat-card style="min-width: 30%;">
+      <mat-card-title>Kullanıcı Girişi</mat-card-title>
+      <mat-card-content>
+        <form [formGroup]="loginForm" style="display: flex; flex-direction:column;">
+          <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="Emailinizi Giriniz" formControlName="email">
+            <!--mat-error ile yanlış olması durumunda hata bastırabiliriz. hasError yardımıyla...-->
+            <mat-error *ngIf="loginForm.get('email')?.hasError('required')">
+              Email Zorunludur.
+            </mat-error>
+            <mat-error *ngIf="loginForm.get('email')?.hasError('email')">
+              Lütfen doğru formatta giriniz..
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field  >
+            <mat-label>Şifre</mat-label>
+            <input matInput placeholder="Şifre Giriniz" type="password" formControlName="password">
+            <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
+              Şifre Zorunludur.
+            </mat-error>
+            <mat-error *ngIf="loginForm.get('password')?.hasError('minlength')">
+              Lütfen minimum 8 hanelik şifre girin..
+            </mat-error>
+          </mat-form-field>
+          <div class="btns">
+            <a style="text-decoration:none; color:black" routerLink="/register">Kayıt Ol</a>
+            <button [disabled]="loginForm.invalid" mat-raised-button color="primary">Giriş Yap</button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
